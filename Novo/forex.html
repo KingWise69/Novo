@@ -12,6 +12,8 @@
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
     <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image" href="assets/favicon-32x32.png">
     <title>Novo Enterprises Limited</title>
   </head>
@@ -49,6 +51,7 @@
         <a href="#choose"><i class="ri-arrow-down-double-line"></i></a>
       </div>
     </header>
+    
 
    
 
@@ -112,13 +115,12 @@
       <div class="section__container stats__container">
         <div class="stats__content">
           <p class="section__subheader">Novo</p>
-          <h2 class="section__header">About Us</h2>
+          <h2 class="section__header">Forex Bureau</h2>
           <p class="para">
-            With a team of dedicated experts and professionals, we bring a
-            wealth of experience and knowledge to every project. Our deep
-            industry insights and hands-on experience enable us to tackle even
-            the most complex industrial challenges, providing you with tailored
-            solutions that drive results.
+            Licensed by the Bank of Uganda to 
+            provide forex services. 
+            The forex industry in Uganda is crucial for facilitating international trade, tourism, and investment. As such, Novo Forex Bureau Limited provides a reliable and convenient way 
+            for customers to access forex services.
           </p>
           <div class="stats__grid">
             <div class="stats__card">
@@ -149,6 +151,24 @@
         </div>
       </div>
     </section>
+
+
+
+  <section class="section__container">
+      <h2 class="section__header">Live Exchange Rates</h2>
+      <canvas id="exchangeRateChart"></canvas>
+  </section>
+
+  <section class="section__container">
+      <h2 class="section__header">Live Stock Market Chart</h2>
+      <div class="chart-container" style="position: relative; height:300px; width:100%">
+          <canvas id="stockChart"></canvas>
+      </div>
+  </section>
+
+
+
+    
 
     <section class="section__container testimonial__container" id="testimonial">
       <h2 class="section__header">Testimonials</h2>
@@ -326,5 +346,103 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
+
+
+
+
+    <script>
+      const exchangeRateCtx = document.getElementById('exchangeRateChart').getContext('2d');
+      new Chart(exchangeRateCtx, {
+          type: 'bar',
+          data: {
+              labels: ['USD', 'EUR', 'GBP'],
+              datasets: [
+                  {
+                      label: 'Buying Rate',
+                      data: [3700, 4000, 4700],
+                      backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                  },
+                  {
+                      label: 'Selling Rate',
+                      data: [3750, 4050, 4750],
+                      backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                  }
+              ]
+          },
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      position: 'top'
+                  }
+              },
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      title: {
+                          display: true,
+                          text: 'Exchange Rate (UGX)'
+                      }
+                  }
+              }
+          }
+      });
+  </script>
+
+  <script>
+      const ctx = document.getElementById('stockChart').getContext('2d');
+      const stockChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              datasets: [
+                  {
+                      label: 'USD to UGX',
+                      data: [3700, 3750, 3800, 3900, 3850, 3950, 4000, 4100, 4200, 4150, 4250, 4300],
+                      borderColor: '#ff5f11',
+                      backgroundColor: 'rgba(255, 95, 17, 0.2)',
+                      fill: true,
+                      tension: 0.3,
+                      pointRadius: 3,
+                  },
+                  {
+                      label: 'EUR to UGX',
+                      data: [4000, 4050, 4100, 4200, 4150, 4250, 4300, 4400, 4500, 4450, 4550, 4600],
+                      borderColor: '#1e90ff',
+                      backgroundColor: 'rgba(30, 144, 255, 0.2)',
+                      fill: true,
+                      tension: 0.3,
+                      pointRadius: 3,
+                  }
+              ]
+          },
+          options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                  legend: {
+                      display: true,
+                      position: 'top'
+                  }
+              },
+              scales: {
+                  x: {
+                      title: {
+                          display: true,
+                          text: 'Months'
+                      }
+                  },
+                  y: {
+                      title: {
+                          display: true,
+                          text: 'Exchange Rate (UGX)'
+                      },
+                      beginAtZero: false
+                  }
+              }
+          }
+      });
+  </script>
+  
   </body>
 </html>
